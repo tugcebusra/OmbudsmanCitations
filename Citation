@@ -10,7 +10,7 @@
 
   <locale xml:lang="tr-TR">
     <terms>
-      <term name="and">and</term>
+      <term name="ve">and</term>
       <term name="et-al">vd.</term>
       <term name="page" form="short">
         <single>s.</single>
