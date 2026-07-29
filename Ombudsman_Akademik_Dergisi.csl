@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0.2" class="in-text" default-locale="tr-TR" demote-non-dropping-particle="sort-only">
+  <info>
+    <title>Ombudsman Akademik Dergisi</title>
+    <title-short>Ombudsman Akademik</title-short>
+    <id>http://www.zotero.org/styles/ombudsman-akademik-dergisi-custom</id>
+    <link href="http://www.zotero.org/styles/ombudsman-akademik-dergisi-custom" rel="self"/>
+    <category citation-format="author-date"/>
+    <category field="political_science"/>
+    <summary>Kamu Denetçiliği Kurumu/Ombudsman Akademik Dergisi yazım kurallarına göre hazırlanmış özel Türkçe yazar-tarih stili.</summary>
+    <updated>2026-07-29T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+
+  <locale xml:lang="tr-TR">
+    <terms>
+      <term name="and">ve</term>
+      <term name="et-al">vd.</term>
+      <term name="page" form="short">s.</term>
+      <term name="page-range" form="short">ss.</term>
+      <term name="volume" form="short">Cilt</term>
+      <term name="issue" form="short">Sayı</term>
+      <term name="edition" form="short">Baskı</term>
+      <term name="accessed">Erişim Tarihi</term>
+      <term name="translator" form="short">Çev.</term>
+    </terms>
+  </locale>
+
+  <macro name="author-citation">
+    <names variable="author">
+      <name form="short" and="text" delimiter=", " delimiter-precedes-last="never" et-al-min="3" et-al-use-first="1"/>
+      <substitute>
+        <names variable="editor">
+          <name form="short" and="text" delimiter=", " delimiter-precedes-last="never" et-al-min="3" et-al-use-first="1"/>
+        </names>
+        <text variable="publisher"/>
+        <text variable="title" form="short"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="author-bibliography">
+    <names variable="author">
+      <name initialize="false" name-as-sort-order="all" sort-separator=", " and="text" delimiter=", " delimiter-precedes-last="never">
+        <name-part name="family" text-case="uppercase"/>
+        <name-part name="given"/>
+      </name>
+      <substitute>
+        <names variable="editor">
+          <name initialize="false" name-as-sort-order="all" sort-separator=", " and="text" delimiter=", " delimiter-precedes-last="never">
+            <name-part name="family" text-case="uppercase"/>
+            <name-part name="given"/>
+          </name>
+        </names>
+        <text variable="publisher" text-case="uppercase"/>
+        <text variable="title" text-case="uppercase"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="issued-year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="issued-full">
+    <date variable="issued">
+      <date-part name="day" suffix=" "/>
+      <date-part name="month" form="long" suffix=" "/>
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="accessed-date">
+    <date variable="accessed" form="numeric" date-parts="year-month-day"/>
+  </macro>
+
+  <macro name="title-bold">
+    <text variable="title" font-weight="bold"/>
+  </macro>
+
+  <macro name="translator">
+    <names variable="translator" prefix="Çev. ">
+      <name initialize="false" name-as-sort-order="all" sort-separator=" " and="text" delimiter=", " delimiter-precedes-last="never"/>
+    </names>
+  </macro>
+
+  <macro name="edition">
+    <choose>
+      <if variable="edition">
+        <group delimiter=" ">
+          <number variable="edition" form="ordinal"/>
+          <text term="edition" form="short"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="pages">
+    <choose>
+      <if variable="page">
+        <group delimiter=" ">
+          <choose>
+            <if is-numeric="page">
+              <label variable="page" form="short"/>
+            </if>
+          </choose>
+          <text variable="page"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+
+  <citation disambiguate-add-year-suffix="true" collapse="year-suffix">
+    <sort>
+      <key macro="author-citation"/>
+      <key macro="issued-year"/>
+    </sort>
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="author-citation"/>
+        <group delimiter=": ">
+          <text macro="issued-year"/>
+          <text variable="locator"/>
+        </group>
+      </group>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="true" entry-spacing="0" line-spacing="1" et-al-min="999" et-al-use-first="999">
+    <sort>
+      <key macro="author-bibliography"/>
+      <key macro="issued-year" sort="descending"/>
+      <key variable="title"/>
+    </sort>
+    <layout suffix=".">
+      <text macro="author-bibliography" suffix=" "/>
+      <text macro="issued-year" prefix="(" suffix="). "/>
+      <choose>
+        <if type="book chapter paper-conference entry-encyclopedia entry-dictionary" match="any">
+          <text macro="title-bold"/>
+          <text macro="translator" prefix=", "/>
+          <choose>
+            <if type="chapter paper-conference entry-encyclopedia entry-dictionary" match="any">
+              <group prefix=", " delimiter=", ">
+                <names variable="editor" prefix="Editör: ">
+                  <name initialize="false" and="text" delimiter=", " delimiter-precedes-last="never"/>
+                </names>
+                <text variable="container-title" font-weight="bold"/>
+              </group>
+            </if>
+          </choose>
+          <group prefix=", " delimiter=", ">
+            <text variable="publisher"/>
+            <text macro="edition"/>
+            <text variable="publisher-place"/>
+            <text macro="pages"/>
+          </group>
+        </if>
+
+        <else-if type="article-journal article-magazine" match="any">
+          <text variable="title" prefix="“" suffix="”"/>
+          <group prefix=", " delimiter=", ">
+            <text variable="container-title" font-weight="bold"/>
+            <text variable="publisher"/>
+            <group delimiter=": ">
+              <text term="volume" form="short"/>
+              <text variable="volume"/>
+            </group>
+            <group delimiter=": ">
+              <text term="issue" form="short"/>
+              <text variable="issue"/>
+            </group>
+            <text macro="pages"/>
+          </group>
+        </else-if>
+
+        <else-if type="article-newspaper">
+          <text variable="title" prefix="“" suffix="”"/>
+          <group prefix=", " delimiter=", ">
+            <text variable="container-title" font-weight="bold"/>
+            <text macro="issued-full"/>
+            <text macro="pages"/>
+          </group>
+        </else-if>
+
+        <else-if type="thesis">
+          <text macro="title-bold"/>
+          <group prefix=", " delimiter=", ">
+            <text variable="genre"/>
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+            <text macro="pages"/>
+          </group>
+        </else-if>
+
+        <else-if type="report">
+          <text macro="title-bold"/>
+          <group prefix=", " delimiter=", ">
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+            <text macro="pages"/>
+          </group>
+        </else-if>
+
+        <else-if type="webpage post post-weblog" match="any">
+          <text variable="title" prefix="“" suffix="”"/>
+          <text variable="URL" prefix=", "/>
+          <group prefix=" (" suffix=")" delimiter=": ">
+            <text term="accessed"/>
+            <text macro="accessed-date"/>
+          </group>
+        </else-if>
+
+        <else>
+          <text macro="title-bold"/>
+          <group prefix=", " delimiter=", ">
+            <text variable="container-title" font-weight="bold"/>
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+            <text macro="pages"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
