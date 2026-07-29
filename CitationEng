@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl"
+       version="1.0"
+       class="in-text"
+       default-locale="en-US">
+
+  <info>
+    <title>Ombudsman Academic Journal — English</title>
+    <id>http://www.zotero.org/styles/ombudsman-akademik-dergisi-en</id>
+    <link href="http://www.zotero.org/styles/ombudsman-akademik-dergisi-en"
+          rel="self"/>
+    <category citation-format="author-date"/>
+    <updated>2026-07-29T09:05:00+03:00</updated>
+  </info>
+
+  <locale xml:lang="tr-TR">
+    <terms>
+      <term name="and">ve</term>
+      <term name="et-al">vd.</term>
+      <term name="page" form="short">
+        <single>s.</single>
+        <multiple>ss.</multiple>
+      </term>
+    </terms>
+  </locale>
+
+  <locale xml:lang="en-US">
+    <terms>
+      <term name="and">and</term>
+      <term name="et-al">et al.</term>
+      <term name="page" form="short">
+        <single>p.</single>
+        <multiple>pp.</multiple>
+      </term>
+    </terms>
+  </locale>
+
+  <macro name="author-citation">
+    <names variable="author">
+      <name form="short"
+            and="text"
+            delimiter=", "
+            delimiter-precedes-last="never"
+            et-al-min="3"
+            et-al-use-first="1"/>
+      <substitute>
+        <names variable="editor"/>
+        <text variable="publisher"/>
+        <text variable="title" form="short"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="author-bibliography">
+    <names variable="author">
+      <name initialize="false"
+            name-as-sort-order="all"
+            sort-separator=", "
+            and="text"
+            delimiter=", "
+            delimiter-precedes-last="never">
+        <name-part name="family" text-case="uppercase"/>
+        <name-part name="given"/>
+      </name>
+
+      <substitute>
+        <names variable="editor">
+          <name initialize="false"
+                name-as-sort-order="all"
+                sort-separator=", "
+                and="text"
+                delimiter=", "
+                delimiter-precedes-last="never">
+            <name-part name="family" text-case="uppercase"/>
+            <name-part name="given"/>
+          </name>
+        </names>
+
+        <text variable="publisher" text-case="uppercase"/>
+        <text variable="title" text-case="uppercase"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="issued-year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="accessed-date">
+    <date variable="accessed" delimiter=".">
+      <date-part name="day" form="numeric-leading-zeros"/>
+      <date-part name="month" form="numeric-leading-zeros"/>
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <citation disambiguate-add-year-suffix="true">
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="author-citation"/>
+
+        <group delimiter=": ">
+          <text macro="issued-year"/>
+          <text variable="locator"/>
+        </group>
+      </group>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="true"
+                entry-spacing="0"
+                line-spacing="1">
+
+    <sort>
+      <key macro="author-bibliography"/>
+      <key variable="issued" sort="descending"/>
+      <key variable="title"/>
+    </sort>
+
+    <layout suffix=".">
+      <text macro="author-bibliography" suffix=" "/>
+      <text macro="issued-year" prefix="(" suffix="). "/>
+
+      <choose>
+
+        <if type="article-journal article-magazine article-newspaper"
+            match="any">
+
+          <text variable="title" prefix="“" suffix="”"/>
+
+          <group prefix=", " delimiter=", ">
+            <text variable="container-title" font-weight="bold"/>
+            <text variable="volume" prefix="Vol.: "/>
+            <text variable="issue" prefix="No.: "/>
+            <text variable="page" prefix="pp. "/>
+          </group>
+
+        </if>
+
+        <else-if type="thesis">
+
+          <text variable="title" font-weight="bold"/>
+
+          <group prefix=", " delimiter=", ">
+            <text variable="genre"/>
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+          </group>
+
+        </else-if>
+
+        <else-if type="webpage post-weblog" match="any">
+
+          <text variable="title" prefix="“" suffix="”"/>
+          <text variable="URL" prefix=", "/>
+
+          <group prefix=" (" suffix=")" delimiter=": ">
+            <text value="Accessed"/>
+            <text macro="accessed-date"/>
+          </group>
+
+        </else-if>
+
+        <else>
+
+          <text variable="title" font-weight="bold"/>
+
+          <group prefix=", " delimiter=", ">
+            <text variable="publisher"/>
+            <text variable="edition" suffix=" ed."/>
+            <text variable="publisher-place"/>
+          </group>
+
+        </else>
+
+      </choose>
+    </layout>
+  </bibliography>
+
+</style>
